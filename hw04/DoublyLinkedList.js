@@ -106,12 +106,12 @@ console.log('a22 = ' + a22 + '; a22 length = ' + a22.length);
 let dll = new DoublyLinkedList;
 dll.forEach((i) => {console.log(i)});
 console.log('length = ' + dll.length);
-/*
+
 a11.forEach((i) => {
     dll.prepend(i);
     console.log('dll.length = ' + dll.length);
 });
-*/
+
 a22.forEach((i) => {
     dll.append(i);
     console.log('dll.length = ' + dll.length);
