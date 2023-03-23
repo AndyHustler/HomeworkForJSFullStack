@@ -9,7 +9,7 @@ class LinkedListNode {
 }
 
 class LinkedList {
-    constructor(comparator) {
+    constructor() {
         this.head = null;
         //this.tail = null;
         this.length = 0;

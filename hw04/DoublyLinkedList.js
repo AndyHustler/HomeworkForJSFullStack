@@ -1,6 +1,8 @@
 console.log('------------------------------------------------');
 console.log('DoublyLinkedList');
 console.log('------------------------------------------------');
+/*
+// Оригинальный класс
 class DoublyLinkedListNode {
     constructor(value, next = null, previous = null) {
         this.previous = previous;
@@ -8,9 +10,20 @@ class DoublyLinkedListNode {
         this.next = next;
     }
 }
+*/
 
+// Класс наследованный от LinkedListNode
+class DoublyLinkedListNode extends LinkedListNode{
+    constructor(value, next = null, previous = null) {
+        super(value, next)
+        this.previous = previous
+    }
+}
+
+/*
+// Оригинальный класс
 class DoublyLinkedList {
-    constructor(comparator) {
+    constructor() {
         this.head = null;
         this.tail = null;
         this.length = 0;
@@ -94,6 +107,61 @@ class DoublyLinkedList {
             currentNode = currentNode.next;
         }
         return done;
+    }
+}
+*/
+
+// Класс наследованный от LinkedList
+class DoublyLinkedList extends LinkedList{
+    constructor(comparator) {
+        super()
+        this.tail = null;
+    }
+    //Добавление с начала
+    prepend(value) {
+        let newNode = new DoublyLinkedListNode(value, this.head);
+        if (this.head) this.head.previous = newNode;
+        this.head = newNode;
+        if (!this.tail) this.tail = newNode;
+        this.length++;
+    }
+    //добавление в конец
+    append(value) {
+        let newNode = new DoublyLinkedListNode(value,null,this.tail);
+        if (this.tail) this.tail.next = newNode;
+        this.tail = newNode;
+        if (!this.head) this.head = newNode;
+        this.length++;
+    }
+    //удаление
+    delete(value) {
+        if (!this.head) return null;
+
+        let deletedNode = null;
+        let currentNode = this.head;
+
+        while (currentNode) {
+            if (currentNode.value === value) {
+                deletedNode = currentNode;
+                switch (deletedNode) {
+                    case this.head:
+                        this.head = deletedNode.next;
+                        this.head.previous = null;
+                        break;
+                    case this.tail:
+                        this.tail = deletedNode.previous;
+                        this.tail.next = null;
+                        break;
+                    default:
+                        const previousNode = deletedNode.previous;
+                        const nextNode = deletedNode.next;
+                        previousNode.next = nextNode;
+                        nextNode.previous = previousNode;
+                }
+                this.length--;
+            }
+            currentNode = currentNode.next;
+        }
     }
 }
 
