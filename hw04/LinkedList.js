@@ -1,4 +1,6 @@
-console.log("LinkedList");
+console.log('------------------------------------------------');
+console.log('LinkedList');
+console.log('------------------------------------------------');
 class LinkedListNode {
     constructor(value, next = null) {
         this.value = value;
@@ -9,17 +11,27 @@ class LinkedListNode {
 class LinkedList {
     constructor(comparator) {
         this.head = null;
+        //this.tail = null;
         this.length = 0;
     }
     //Добавление с начала
     prepend(value) {
         let newNode = new LinkedListNode(value, this.head);
         this.head = newNode;
+        //if (!this.tail) this.tail = newNode;
         this.length++;
     }
     //добавление в конец
     append(value) {
         let newNode = new LinkedListNode(value);
+/*
+        if (!this.head || !this.tail) {
+            this.head = newNode;
+            this.tail = newNode;
+        }
+        this.tail.next = newNode;
+        this.tail = newNode;
+*/
         if (!this.head) {
             this.head = newNode;
         } else {
@@ -29,14 +41,14 @@ class LinkedList {
             }
             current.next = newNode;
         }
+
         this.length++;
     }
     //удаление
     delete(value) {
         if (!this.head) return;
         let deletedNode = null;
-        while (this.head && this.head.value === value) {
-            deletedNode = this.head;
+        while (this.head.value === value) {
             this.head = this.head.next;
             this.length--;
         }
@@ -64,49 +76,47 @@ class LinkedList {
     //поиск
     find(value) {
         let current = this.head;
+        let cou = 0;
         while (current) {
             if(current.value === value){
-                return true;
+                cou++;
             };
             current = current.next;
         }
-        return false;
+        return cou;
     }
     //изменение
-    change(fvalue,cvalue) {
-        let previous = this.head
-        if(previous.value === fvalue){
-            previous.value = cvalue;
-            return true;
+    change(value,newValue) {
+        if (!this.head) return null;
+        let currentNode = this.head;
+        let done = false;
+        while (currentNode) {
+            if (currentNode.value === value) {
+                currentNode.value = newValue;
+                done = true;
+            }
+            currentNode = currentNode.next;
         }
-        let current = previous.next;
-        while (current) {
-            if(current.value === fvalue){
-                current.value = cvalue;
-                previous.next = current;
-                return true;
-            };
-            previous = current
-            current = previous.next;
-        }
-        return false;
+        return done;
     }
 }
 
-//Проверки
-let a1 = [1,2,3];
+console.log('add');
+console.log('');
+let a1 = [1,2,3,2,3,3];
 console.log('a1 = ' + a1 + '; a1 length = ' + a1.length);
-let a2 = ['a','b','c'];
+let a2 = ['a','b','c','a','c','c'];
 console.log('a2 = ' + a2 + '; a2 length = ' + a2.length);
 let ll = new LinkedList;
+
 ll.forEach((i) => {console.log(i)});
 console.log('length = ' + ll.length);
-//prepend
+
 a1.forEach((i) => {
     ll.prepend(i);
     console.log('ll.length = ' + ll.length);
 });
-//append
+
 a2.forEach((i) => {
     ll.append(i);
     console.log('ll.length = ' + ll.length);
@@ -116,46 +126,54 @@ ll.forEach((i) => {console.log(i)});
 console.log('length = ' + ll.length);
 
 //delete
+console.log('------------------------------------------------');
+console.log('delete');
+console.log('');
 let ditem = 'c';
 ll.delete(ditem);
-console.log('ll.delete = ' + ditem); 
+console.log('ll.delete ' + ditem); 
 ll.forEach((i) => {console.log(i)});
 console.log('length = ' + ll.length);
 
 ditem = 3;
 ll.delete(ditem);
-console.log('ll.delete = ' + ditem); 
+console.log('ll.delete ' + ditem); 
 ll.forEach((i) => {console.log(i)});
 console.log('length = ' + ll.length);
 
 ditem = 'a';
 ll.delete(ditem);
-console.log('ll.delete = ' + ditem); 
+console.log('ll.delete ' + ditem); 
 ll.forEach((i) => {console.log(i)});
 console.log('length = ' + ll.length);
 
 //find
-let fitem = 'a';
-console.log('ll.fitem = ' + fitem);
-if(ll.find(fitem)){
-    console.log('Find true');
-} else {
-    console.log('Find false');
-};
+console.log('------------------------------------------------');
+console.log('find');
+console.log('');
+let fitem = 'b';
+console.log('ll.fitem ' + fitem + '; result = ' + ll.find(fitem));
 
-fitem = 1;
-console.log('ll.fitem = ' + fitem);
-if(ll.find(fitem)){
-    console.log('Find true');
-} else {
-    console.log('Find false');
-};
+fitem = 2;
+console.log('ll.fitem ' + fitem + '; result = ' + ll.find(fitem));
+
+fitem = 'ss';
+console.log('ll.fitem ' + fitem + '; result = ' + ll.find(fitem));
 
 //change
-ll.change(2,'box1');
+console.log('------------------------------------------------');
+console.log('change');
+console.log('');
+let ovl = 2;
+let nvl = 'box1';
+console.log('ovl = ' + ovl + '; nvl = ' + nvl);
+ll.change(ovl,nvl);
 ll.forEach((i) => {console.log(i)});
 console.log('length = ' + ll.length);
 
-ll.change('b','box2');
+ovl = 'b';
+nvl = 'box2';
+console.log('ovl = ' + ovl + '; nvl = ' + nvl);
+ll.change(ovl,nvl);
 ll.forEach((i) => {console.log(i)});
 console.log('length = ' + ll.length);
