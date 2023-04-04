@@ -59,6 +59,7 @@ class Graph {
             }
         }
     }
+
     //Обход вершин в ширину с использованием очереди
     bfs(startVertex, callback) {
         if (!(startVertex in this.vertices)) throw new Error('Аргумент не входит в список вершин. Список вершин: ' + Object.keys(this.vertices));
@@ -168,8 +169,9 @@ function findNearestVertex(distances, visited) {
     return nearestVertex;
 }
 
-//Алгоритм Дейкстры предназначен для нахождения кратчайших путей во взвешенных графах 
+//Алгоритм Дейкстры предназначен для поиска путей во взвешенных графах 
 //с неотрицательными весами ребер.
+//Функция выводит кратчайшие пути от выбранной вершины до всех остальных во взвешенном графе
 function dijkstra(graph, startVertex) {
     let visited = {};
     let distances = {}; // кратчайшие пути из стартовой вершины
@@ -220,7 +222,7 @@ function dijkstra(graph, startVertex) {
     }
     
     return { distances, previous };
-  }
+}
 
 let gr = new Graph;
 let ar1 = ['a','b','c','d','e','f','g','h','x','y','z'];
@@ -241,7 +243,23 @@ let ar1v = [
     ['c','y']
 ];
 
+/*
 let graph = {
+    a: { b, d, f },
+    b: { a, c },
+    c: { b, d, e, f, y },
+    d: { a, c, g },
+    e: { c, g },
+    f: { a, c, h },
+    g: { d, e, h, x },
+    h: { f, g },
+    x: { g },
+    y: { c },
+    z: {},
+}
+*/
+//Задаем взвешенный граф как объект объектов (ключ: значение)
+let vgraph = {
     a: { b: 4, d: 9, f: 3 },
     b: { a: 4, c: 7 },
     c: { b: 7, d: 3, e: 8, f: 8, y: 5 },
@@ -253,7 +271,21 @@ let graph = {
     x: { g: 2 },
     y: { c: 5 },
     z: {},
-  }
+}
+
+let orvgraph = {
+    a: { b: 4, d: 9, f: 3 },
+    b: { c: 7 },
+    c: { d: 3, e: 8, f: 8, y: 5 },
+    d: { g: 1 },
+    e: { g: 8 },
+    f: { h: 5 },
+    g: { h: 3, x:2 },
+    h: {},
+    x: {},
+    y: {},
+    z: {},
+}
 
 ar1v.forEach((i) => {gr.addEdge(i[0],i[1])});
 
@@ -273,5 +305,87 @@ finishVertex = 'z';
 console.log(`Поиск кратчайшего пути из вершины ${startVertex} в вершину ${finishVertex}`);
 console.log(gr.findShortestPath(startVertex, finishVertex));
 startVertex = 'b';
-console.log(`Поиск расстояний от вершины ${startVertex}`);
-console.log(dijkstra(graph, startVertex));
+console.log(`Поиск расстояний в неориентированном графе от вершины ${startVertex}`);
+console.log(dijkstra(vgraph, startVertex));
+startVertex = 'a';
+console.log(`Поиск расстояний в ориентированном графе от вершины ${startVertex}`);
+console.log(dijkstra(orvgraph, startVertex));
+
+const objgraph = new Object();
+console.log(objgraph);
+objgraph['a'] = 5;
+console.log(objgraph);
+console.log(Object.keys(objgraph));
+
+class TarifSearch {
+    constructor() {
+        this.citys = {}; // список смежности графа
+    }
+    
+    //Добавление вершин
+    addCitys(value) {
+        if (!this.citys[value]) this.citys[value] = {};
+    }
+    
+    //Добавление рёбер
+    addTarif(city1, city2, val) {
+        if (!(city1 in this.citys) || !(city2 in this.citys)) throw new Error('Таких городов нет в списке. Список городов: ' + Object.keys(this.citys));
+        if (!(city2 in this.citys[city1])) this.citys[city1][city2] = val;
+        if (!(city1 in this.citys[city2])) this.citys[city2][city1] = val;
+    }
+}
+
+let gao = new TarifSearch;
+ar1.forEach((i) => {gao.addCitys(i)});
+let ar1vv = [
+    ['a','b', 4],
+    ['a','d', 9],
+    ['a','f', 3],
+    ['b','c', 7],
+    ['c','d', 3],
+    ['c','e', 8],
+    ['c','f', 8],
+    ['d','g', 1],
+    ['e','g', 8],
+    ['f','h', 5],
+    ['g','h', 3],
+    ['g','x', 2],
+    ['c','y', 5]
+];
+
+ar1vv.forEach((i) => {gao.addTarif(i[0],i[1],i[2])});
+console.log(gao);
+
+console.log('-----------------------------------------------------------------');
+console.log('Поиск минимальной стоимости проезда');
+
+let tarif = [
+    "a;b=4",
+    "a;d=9",
+    "a;f=3",
+    "b;c=7",
+    "c;d=3",
+    "c;e=8",
+    "c;f=8",
+    "d;g=1",
+    "e;g=8",
+    "f;h=5",
+    "g;h=3",
+    "g;x=2",
+    "c;y=5"
+];
+
+function StringParser(str) {
+    let ar = str.split(';');
+    let ar1 = ar[1].split('=');
+    ar = ar.splice(0,1);
+    ar = ar.concat(ar1);
+    console.log(ar)
+    return ar;
+}
+
+let cts = new TarifSearch;
+ar1.forEach((i) => {cts.addCitys(i)});
+console.log(cts);
+tarif.forEach((i) => {cts.addTarif(StringParser(i)[0],StringParser(i)[1],Number(StringParser(i)[2]))});
+console.log(cts);
