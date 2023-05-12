@@ -1,0 +1,224 @@
+html, body, #root, .main {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    font-family: Arial;
+    box-sizing: border-box;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    height: 100vh;
+}
+
+.main_menu {
+    background: linear-gradient(0deg, #9e02e5, #7402e5);
+    width: 250px;
+}
+
+%flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.main_menu_body {
+    @extend %flex-column;
+    margin: 0 30px;
+    height: 100%;
+}
+
+.main_menu_header {
+    width: 100%;
+    border-bottom: 1px solid #ffffff66;
+    & svg {
+        height: inherit;
+        width: 50px;
+        fill: white;
+        margin: 30px 0;
+    }
+}
+
+%for-menu-a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    text-decoration: none;
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+%for-menu-svg {
+    height: 30px;
+    width: 30px;
+    fill: #ffffff66;
+}
+
+%for-menu-text {
+    margin-left: 20px;
+    color: white;
+}
+
+%for-menu-items {
+    & a {
+        @extend %for-menu-a;
+        &:hover>span {
+            color: black;
+        }
+    }
+    & svg {
+        @extend %for-menu-svg;
+    }
+    & span {
+        @extend %for-menu-text;
+    }
+}
+
+.main_menu_top {
+    @extend %for-menu-items;
+    flex-grow: 1;
+}
+
+.main_menu_logout {
+    @extend %for-menu-items;
+    margin-bottom: 30px;
+}
+
+%for-buttons {
+    width: 80px;
+    height: 40px;
+    text-align: center;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-size: 16px;
+    background-color: lightgreen;
+    border: 1px solid lightgreen;
+    color: white;
+}
+
+%flex-centr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main_content {
+    @extend %flex-column;
+    margin-left: 40px;
+    width: 1000px;
+    font-size: 12px;
+    .main_content_header {
+        display: flex;
+        align-items: center;
+        height: 80px;
+        .main_content_title {
+            color: black;
+            margin-left: 20px;
+            text-align: left;
+            font-size: 32px;
+            flex-grow: 1;
+        }
+        .main_content_buttons {
+            & button {
+                @extend %for-buttons;
+            }
+            
+            & :first-child {
+                color: darkgrey;
+                background-color: lightgray;
+                border: 1px solid lightgray;
+            }
+
+            & :hover {
+                background-color: gray;
+                border: 1px solid gray;
+            }
+        }
+    }
+    & table {
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+        & td {
+            text-align: center;
+        }
+        thead {
+            color: gray;
+            tr {
+                & :nth-child(1) {
+                    width: 35%;
+                    text-align: left;
+                }
+                @for $i from 2 through 4 {
+                    & :nth-child(#{$i}) {
+                        width: 20%;
+                        text-align: left;
+                    }
+                }
+                & :nth-child(5) {
+                    width: 15%;
+                    text-align: left;
+                }
+            }
+        }
+        th, td {
+                padding: 20px;
+        }
+        tbody {
+            tr:nth-child(odd) {
+                background-color: rgb(246, 246, 246);
+            }
+            tr {
+                td:first-child {
+                display: flex;
+                align-items: center;
+                    & :first-child {
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 15px;
+                        margin-right: 20px;
+                    }
+                }
+                & :nth-child(3) {
+                    color: rgb(1, 172, 1);
+                }
+                & :nth-child(4) {
+                    color: red;
+                }
+                @for $i from 2 through 5 {
+                    & :nth-child(#{$i}) {
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+    footer {
+        @extend %flex-centr;
+        height: 80px;
+        svg {
+            width: 25px;
+            height: 25px;
+            fill: lightgray;
+        }
+        svg:hover {
+            fill: darkgrey;
+        }
+        div {
+            @extend %flex-centr;
+            width: 28px;
+            height: 28px;
+        }
+        div:nth-child(even) {
+            border: 1px solid lightgray;
+            background-color: lightgray;
+            margin: 6px;
+        }
+    }
+}
+

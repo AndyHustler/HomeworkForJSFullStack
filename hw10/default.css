@@ -1,0 +1,207 @@
+html, body, #root, .main {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  font-family: Arial;
+  box-sizing: border-box;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  height: 100vh;
+}
+
+.main_menu {
+  background: linear-gradient(0deg, #9e02e5, #7402e5);
+  width: 250px;
+}
+
+.main_content, .main_menu_body {
+  display: flex;
+  flex-direction: column;
+}
+
+.main_menu_body {
+  margin: 0 30px;
+  height: 100%;
+}
+
+.main_menu_header {
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+.main_menu_header svg {
+  height: inherit;
+  width: 50px;
+  fill: white;
+  margin: 30px 0;
+}
+
+.main_menu_logout a, .main_menu_top a {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+  text-decoration: none;
+  margin: 10px 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.main_menu_logout svg, .main_menu_top svg {
+  height: 30px;
+  width: 30px;
+  fill: rgba(255, 255, 255, 0.4);
+}
+
+.main_menu_logout span, .main_menu_top span {
+  margin-left: 20px;
+  color: white;
+}
+
+.main_menu_logout a:hover > span, .main_menu_top a:hover > span {
+  color: black;
+}
+.main_menu_top {
+  flex-grow: 1;
+}
+
+.main_menu_logout {
+  margin-bottom: 30px;
+}
+
+.main_content .main_content_header .main_content_buttons button {
+  width: 80px;
+  height: 40px;
+  text-align: center;
+  border-radius: 4px;
+  margin-right: 10px;
+  font-size: 16px;
+  background-color: lightgreen;
+  border: 1px solid lightgreen;
+  color: white;
+}
+
+.main_content footer div, .main_content footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main_content {
+  margin-left: 40px;
+  width: 1000px;
+  font-size: 12px;
+}
+.main_content .main_content_header {
+  display: flex;
+  align-items: center;
+  height: 80px;
+}
+.main_content .main_content_header .main_content_title {
+  color: black;
+  margin-left: 20px;
+  text-align: left;
+  font-size: 32px;
+  flex-grow: 1;
+}
+.main_content .main_content_header .main_content_buttons :first-child {
+  color: darkgrey;
+  background-color: lightgray;
+  border: 1px solid lightgray;
+}
+.main_content .main_content_header .main_content_buttons :hover {
+  background-color: gray;
+  border: 1px solid gray;
+}
+.main_content table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.main_content table td {
+  text-align: center;
+}
+.main_content table thead {
+  color: gray;
+}
+.main_content table thead tr :nth-child(1) {
+  width: 35%;
+  text-align: left;
+}
+.main_content table thead tr :nth-child(2) {
+  width: 20%;
+  text-align: left;
+}
+.main_content table thead tr :nth-child(3) {
+  width: 20%;
+  text-align: left;
+}
+.main_content table thead tr :nth-child(4) {
+  width: 20%;
+  text-align: left;
+}
+.main_content table thead tr :nth-child(5) {
+  width: 15%;
+  text-align: left;
+}
+.main_content table th, .main_content table td {
+  padding: 20px;
+}
+.main_content table tbody tr:nth-child(odd) {
+  background-color: rgb(246, 246, 246);
+}
+.main_content table tbody tr td:first-child {
+  display: flex;
+  align-items: center;
+}
+.main_content table tbody tr td:first-child :first-child {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  margin-right: 20px;
+}
+.main_content table tbody tr :nth-child(3) {
+  color: rgb(1, 172, 1);
+}
+.main_content table tbody tr :nth-child(4) {
+  color: red;
+}
+.main_content table tbody tr :nth-child(2) {
+  text-align: left;
+}
+.main_content table tbody tr :nth-child(3) {
+  text-align: left;
+}
+.main_content table tbody tr :nth-child(4) {
+  text-align: left;
+}
+.main_content table tbody tr :nth-child(5) {
+  text-align: left;
+}
+.main_content footer {
+  height: 80px;
+}
+.main_content footer svg {
+  width: 25px;
+  height: 25px;
+  fill: lightgray;
+}
+.main_content footer svg:hover {
+  fill: darkgrey;
+}
+.main_content footer div {
+  width: 28px;
+  height: 28px;
+}
+.main_content footer div:nth-child(even) {
+  border: 1px solid lightgray;
+  background-color: lightgray;
+  margin: 6px;
+}
+
+/*# sourceMappingURL=default.css.map */
