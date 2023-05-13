@@ -52,6 +52,10 @@ html, body, #root, .main {
     justify-content: center;
 }
 
+.main_menu_body {
+    flex-grow: 1;
+}
+
 .main_menu_item {
     display: flex;
     align-items: center;
@@ -82,10 +86,6 @@ html, body, #root, .main {
 .main_menu_item_text {
     display: block;
     margin-right: 20px;
-}
-
-.main_menu_center {
-    flex-grow: 1;
 }
 
 .main_content_layout {
